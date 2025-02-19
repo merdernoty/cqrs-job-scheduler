@@ -34,6 +34,7 @@ export class JobsService {
     return job;
   }
 
+  // Получение задачи по айди
   getJob(id: string): Job {
     const job = this.jobs.get(id);
     if (!job) {
@@ -42,10 +43,13 @@ export class JobsService {
     return job;
   }
 
+// Получение всех задач
   getJobs(): Job[] {
     return Array.from(this.jobs.values());
   }
 
+
+// Отмена задачи
   cancelJob(id: string): Job {
     const job = this.jobs.get(id);
     if (!job) {
