@@ -6,7 +6,7 @@ import { JobsService } from './jobs.service';
 export class JobsProcessor {
   constructor(private jobsService: JobsService) {}
 
-  @Process('execute')
+  @Process({ name: 'execute', concurrency: 5 })
   async handleExecute(bullJob: BullJob<{ id: string }>) {
     const jobId = bullJob.data.id;
     this.jobsService.updateJobStatus(jobId, 'executing');

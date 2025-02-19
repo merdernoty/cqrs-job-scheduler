@@ -2,21 +2,11 @@ import {
   Injectable,
   BadRequestException,
   NotFoundException,
-  Logger,
 } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 import { InjectQueue } from '@nestjs/bull';
 import { Queue } from 'bull';
-
-export type JobStatus = 'scheduled' | 'executing' | 'executed' | 'cancelled';
-
-export interface Job {
-  id: string;
-  description: string;
-  executeAt: Date;
-  status: JobStatus;
-  executedAt?: Date;
-}
+import { Job } from './entity/job.entity';
 
 @Injectable()
 export class JobsService {
@@ -24,7 +14,7 @@ export class JobsService {
 
   constructor(@InjectQueue('jobs') private jobQueue: Queue) {}
 
-  // Создание задачи с Bull-планированием
+  // Создание задачи
   async createJob(description: string, executeAt: Date): Promise<Job> {
     if (executeAt.getTime() <= Date.now()) {
       throw new BadRequestException('executeAt must be in the future');

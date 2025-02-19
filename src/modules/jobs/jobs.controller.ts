@@ -1,6 +1,5 @@
 import { Controller, Post, Get, Delete, Body, Param } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-
 import { Job } from './entity/job.entity';
 import { CreateJobCommand } from './commands/impl/create-job.command';
 import { GetJobsQuery } from './queries/impl/get-jobs.query';
