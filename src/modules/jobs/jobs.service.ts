@@ -10,7 +10,7 @@ import { Job } from './entity/job.entity';
 
 @Injectable()
 export class JobsService {
-  private jobs = new Map<string, Job>();
+  private jobs = new Map<string, Job>(); // TODO: replace with a database
 
   constructor(@InjectQueue('jobs') private jobQueue: Queue) {}
 
